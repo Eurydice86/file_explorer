@@ -1,34 +1,23 @@
-#include <string>
 #include <iostream>
 #include <filesystem>
-#include <vector>
 #include <functional>
 #include <algorithm>
+
+std::tuple<std::string, std::vector<std::string>> parser(int argc, char* argv[]);
 
 namespace fs = std::filesystem;
 
 int main(int argc, char* argv[]) {
+  auto [path, flags] = parser(argc, argv);
 
-  std::vector<std::string> flags;
+  fs::path p = path;
 
-  fs::path p = "./";
-  if (argc > 1) {
-    p += argv[1];
-  }
-
-  for (int i = 1; i < argc; i++) {
-    std::string s(argv[i]);
-    if (s[0] == '-') {
-      flags.push_back(s.substr(1));
-    }
-  }
-
-  std::string path(p);
   int path_buffer = 1;
   if (path[path.size() - 1] == '/') {
     path_buffer = 0;
   }
   
+
   std::vector<std::string> output_list;
   for (const auto &entry : fs::directory_iterator(p)) {
     std::string file_or_directory = entry.path();
@@ -40,5 +29,4 @@ int main(int argc, char* argv[]) {
   for (auto o : output_list) {
     std::cout << o  << "\n";
   }
-  
-}
+} 
