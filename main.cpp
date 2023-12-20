@@ -9,6 +9,32 @@ struct path_flags {
   std::vector<std::string> flags;
 };
 
+struct Output {
+  std::string name;
+  std::string type;
+  bool is_hidden;
+  std::string colour;
+
+  Output(std::string _name,  bool _is_directory) {
+    this->name = _name;
+    this->type = "file";
+    this->colour = "0";
+    if (_is_directory) {
+      this->type = "directory";
+      this->colour = "7";
+    }
+    this->is_hidden = false;
+    if (_name[0] == '.') {
+      this->is_hidden = true;
+      this->colour = "32";
+    }
+  }
+
+  void print() {
+    std::cout << "\033[1;" << this->colour << "m" << this->name << "\033[0m\n";
+  }
+};
+
 enum class error {
   compile_time_error,
   parse_error
@@ -16,9 +42,7 @@ enum class error {
 
 //path_flags parser(std::vector<std::string> args);
 auto parser(std::vector<std::string> args) -> std::expected<path_flags, error>;
-
-
-std::vector<std::string> output(std::string, std::vector<std::string>);
+std::vector<Output> output(std::string, std::vector<std::string>);
 
 int main(int argc, char* argv[]) {
   std::vector<std::string> args;
@@ -36,11 +60,12 @@ int main(int argc, char* argv[]) {
     path = pf.value().path;
     flags = pf.value().flags;
   }
-  auto output_list = output(path, flags);
+  std::vector<Output> output_list = output(path, flags);
 
   for (auto o : output_list) {
-    std::cout << o << "\n";
+    o.print();
   }
+  
   for (auto f : flags)
     std::cout << f << "\n";
 }
