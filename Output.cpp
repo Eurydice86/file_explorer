@@ -25,7 +25,7 @@ Output::Output(std::string _name,  bool _is_directory) {
 }
 
 void Output::print() {
-  std::cout  << this->icon << "  \033[1;" << this->colour << "m" << this->name << "\033[0m\n";
+  std::cout  << this->icon << "  \033[1;" << this->colour << "m" << this->name << "\033[0m";
 }
 
 std::vector<Output> output(std::string path, std::vector<std::string> flags) {

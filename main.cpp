@@ -21,8 +21,10 @@ int main(int argc, char* argv[]) {
   }
   std::vector<Output> output_list = output(path, flags);
 
+  std::string separator = "\t\t";
   for (auto o : output_list) {
     o.print();
+    std::cout << separator;
   }
   std::cout << "\nFlags:\n";
   for (auto f : flags)
