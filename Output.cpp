@@ -3,36 +3,30 @@
 #include <algorithm>
 #include <iostream>
 
+#include "Output.h"
+
 namespace fs = std::filesystem;
 
-struct Output {
-  std::string name;
-  std::string type;
-  std::string icon;
-  bool is_hidden;
-  std::string colour;
-
-  Output(std::string _name,  bool _is_directory) {
-    this->name = _name;
-    this->type = "file";
-    this->colour = "0";
-    this->icon = "";
-    if (_is_directory) {
-      this->type = "directory";
-      this->colour = "7";
-      this->icon = "";
-    }
-    this->is_hidden = false;
-    if (_name[0] == '.') {
-      this->is_hidden = true;
-      this->colour = "32";
-    }
+Output::Output(std::string _name,  bool _is_directory) {
+  this->name = _name;
+  this->type = "file";
+  this->colour = "0";
+  this->icon = "";
+  if (_is_directory) {
+    this->type = "directory";
+    this->colour = "7";
+    this->icon = "";
   }
-
-  void print() {
-    std::cout  << this->icon << "  \033[1;" << this->colour << "m" << this->name << "\033[0m\n";
+  this->is_hidden = false;
+  if (_name[0] == '.') {
+    this->is_hidden = true;
+    this->colour = "32";
   }
-};
+}
+
+void Output::print() {
+  std::cout  << this->icon << "  \033[1;" << this->colour << "m" << this->name << "\033[0m\n";
+}
 
 std::vector<Output> output(std::string path, std::vector<std::string> flags) {
 

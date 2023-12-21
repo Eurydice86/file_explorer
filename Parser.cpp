@@ -1,24 +1,9 @@
-#include <string>
-#include <expected>
-#include <vector>
-#include <tuple>
-#include <iostream>
-
-struct path_flags {
-  std::string path;
-  std::vector<std::string> flags;
-};
-
-enum class error {
-  compile_time_error,
-  parse_error
-};
+#include "Parcer.h"
 
 // The parser function reads the arguments given and returns:
 // - a string, which is the path for which the contents will be shown
 // - a vector of strings, which are the flags (i.e. options), which start with '-'
-auto parser(std::vector<std::string> args) -> std::expected<path_flags, error> {
-  //path_flags parser(std::vector<std::string> args) {
+auto parser(std::vector<std::string> args) -> std::expected<Path_Flags, Error> {
   std::string path = "./";
   std::vector<std::string> flags;
 
@@ -31,17 +16,13 @@ auto parser(std::vector<std::string> args) -> std::expected<path_flags, error> {
       path += arg;
       path_counter++;
       if (path_counter > 1)
-	return std::unexpected(error::parse_error);
+	return std::unexpected(Error::parse_error);
     }
   }
 
-  path_flags pf;
+  Path_Flags pf;
   pf.path = path;
   pf.flags = flags;
 
   return pf;
 }
-
-// path
-// flags
-// visual flags

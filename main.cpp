@@ -1,51 +1,6 @@
-#include <iostream>
-#include <functional>
-#include <expected>
-#include <tuple>
-#include <string>
+#include "Parcer.h"
+#include "Output.h"
 
-struct path_flags {
-  std::string path;
-  std::vector<std::string> flags;
-};
-
-struct Output {
-  std::string name;
-  std::string type;
-  std::string icon;
-  bool is_hidden;
-  std::string colour;
-
-  Output(std::string _name,  bool _is_directory) {
-    this->name = _name;
-    this->type = "file";
-    this->colour = "0";
-    this->icon = "";
-    if (_is_directory) {
-      this->type = "directory";
-      this->colour = "7";
-      this->icon = "";
-    }
-    this->is_hidden = false;
-    if (_name[0] == '.') {
-      this->is_hidden = true;
-      this->colour = "32";
-    }
-  }
-
-  void print() {
-    std::cout  << this->icon << "  \033[1;" << this->colour << "m" << this->name << "\033[0m\n";
-  }
-};
-
-enum class error {
-  compile_time_error,
-  parse_error
-};
-
-//path_flags parser(std::vector<std::string> args);
-auto parser(std::vector<std::string> args) -> std::expected<path_flags, error>;
-std::vector<Output> output(std::string, std::vector<std::string>);
 
 int main(int argc, char* argv[]) {
   std::vector<std::string> args;
@@ -57,8 +12,9 @@ int main(int argc, char* argv[]) {
   std::vector<std::string> flags;
   
   auto pf = parser(args);
-  if (!pf.has_value())
+  if (!pf.has_value()) {
     std::cout << "Error"  << "\n";
+  }
   else {
     path = pf.value().path;
     flags = pf.value().flags;
@@ -68,7 +24,7 @@ int main(int argc, char* argv[]) {
   for (auto o : output_list) {
     o.print();
   }
-  
+  std::cout << "\nFlags:\n";
   for (auto f : flags)
     std::cout << f << "\n";
 }
