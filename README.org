@@ -11,10 +11,17 @@ I did this mostly for fun, practice and something to keep myself occupied with. 
 - Files and directories also show an icon next to them.
 
 ** Known issues
-- This does not (yet) work with directory names like "~" or "/".
-- The flags are not doing anything yet, they are simply printed out.
++ This does not (yet) work with directory names like "~" or "/".
++ The flags are not doing anything yet, they are simply printed out.
++ Hidden files and directories are currently shown by default.
++ Icons are currently shown by default.
 
 ** To do
-- Fix bug mentioned in the first known issue.
-- Implement flags functionality.
-  -
++ Fix bug mentioned in the first known issue.
++ Hide hidden files and directories if no flags given.
++ Hide icons if no flags given.
++ Implement flags functionality.
+  + l: display output vertically ("\n" separated).
+  + a: display hidden files and directories.
+  + i: display icons.
++ Add more icons.
