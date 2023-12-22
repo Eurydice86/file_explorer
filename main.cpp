@@ -21,7 +21,7 @@ int main(int argc, char* argv[]) {
   }
   std::vector<Output> output_list = output(path, flags);
 
-  std::string separator = "  ";
+  std::string separator = "\t";
   for (auto o : output_list) {
     o.print();
     std::cout << separator;
