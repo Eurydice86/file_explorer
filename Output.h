@@ -12,3 +12,4 @@ struct Output {
 };
 
 std::vector<Output> output(std::string, std::vector<std::string>);
+

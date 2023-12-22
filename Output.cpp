@@ -7,6 +7,7 @@
 
 namespace fs = std::filesystem;
 
+// Class implementation for an Output object, containing the info of the found item (file or folder)
 Output::Output(std::string _name,  bool _is_directory) {
   this->name = _name;
   this->type = "file";
@@ -14,13 +15,16 @@ Output::Output(std::string _name,  bool _is_directory) {
   this->icon = "";
   if (_is_directory) {
     this->type = "directory";
-    this->colour = "7";
+    this->colour = "36";
     this->icon = "";
   }
   this->is_hidden = false;
   if (_name[0] == '.') {
     this->is_hidden = true;
     this->colour = "32";
+    if (this->type == "directory") {
+      this->colour = "38";
+    }
   }
 }
 
