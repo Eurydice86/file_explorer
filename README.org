@@ -1,7 +1,20 @@
-* File Explorer is is an alternative to ls written in c++
-I did this mostly for fun.
+* File Explorer is is an alternative to ls, written in c++
+I did this mostly for fun, practice and something to keep myself occupied with. It is very lacking and should not be used as a serious alternative to ls.
 
-* Installation
+** Installation
 
 1) Clone the repository: via https =git clone https://github.com/Eurydice86/file_explorer.git= or ssh =git clone git@github.com:Eurydice86/file_explorer.git=
 2) Add the executable to your system PATH (for instance, you can copy it to =/usr/local/bin/=: =sudo cp fexp /usr/local/bin/=)
+
+** Features
+- Directory names are shown in a different colour.
+- Files and directories also show an icon next to them.
+
+** Known issues
+- This does not (yet) work with directory names like "~" or "/".
+- The flags are not doing anything yet, they are simply printed out.
+
+** To do
+- Fix bug mentioned in the first known issue.
+- Implement flags functionality.
+  -
