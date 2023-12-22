@@ -15,7 +15,7 @@ You can use the command =fexp= followed by the path to the directory whose conte
 - Files and directories also show an icon next to them.
 
 ** Known issues
-+ This does not (yet) work with directory names like "~" or "/".
++ This does not (yet) work with directory names like "~" or "/". In fact it only supports paths given relative to the current one.
 + The flags are not doing anything yet, they are simply printed out.
 + Hidden files and directories are currently shown by default.
 + Icons are currently shown by default.
