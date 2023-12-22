@@ -5,7 +5,10 @@ I did this mostly for fun, practice and something to keep myself occupied with. 
 
 1) Clone the repository: via https: =git clone https://github.com/Eurydice86/file_explorer.git= or ssh: =git clone git@github.com:Eurydice86/file_explorer.git=
 2) Add the executable to your system PATH (for instance, you can copy it to =/usr/local/bin/=: =sudo cp file_explorer/fexp /usr/local/bin/=)
-3) You can then remove the cloned repo: =rm -rf file_explorer= 
+3) You can then remove the cloned repo: =rm -rf file_explorer=
+
+** Usage
+You can use the command =fexp= followed by the path to the directory whose contents you would like to display, similar to how you would use =ls=. If no path given, fexp will display the current directory's contents.
 
 ** Features
 - Directory names are shown in a different colour.
