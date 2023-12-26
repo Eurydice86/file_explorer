@@ -16,16 +16,10 @@ You can use the command =fexp= followed by the path to the directory whose conte
 
 ** Known issues
 + This does not (yet) work with directory names like "~" or "/". In fact it only supports paths given relative to the current one.
-+ The flags are not doing anything yet, they are simply printed out.
-+ Hidden files and directories are currently shown by default.
-+ Icons are currently shown by default.
++ It currently displays everything in the given path.
++ README.org is displayed as "%".
 
 ** To do
 + Fix bug mentioned in the first known issue.
-+ Hide hidden files and directories if no flags given.
-+ Hide icons if no flags given.
-+ Implement flags functionality.
-  + l: display output vertically ("\n" separated).
-  + a: display hidden files and directories.
-  + i: display icons.
 + Add more icons.
++ Implement filtering of the results.
