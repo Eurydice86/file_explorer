@@ -2,6 +2,8 @@
 #include <vector>
 #include <algorithm>
 #include <iostream>
+#include <unordered_map>
+#include <algorithm>
 
 #include "Output.h"
 
@@ -11,28 +13,60 @@ namespace fs = std::filesystem;
 Output::Output(std::string _name,  bool _is_directory) {
   this->name = _name;
   this->type = "file";
-  this->colour = "0";
+  this->colour = "33";
   this->icon = "";
   if (_is_directory) {
     this->type = "directory";
-    this->colour = "36";
+    this->colour = "37";
     this->icon = "";
   }
   this->is_hidden = false;
   if (_name[0] == '.') {
     this->is_hidden = true;
-    this->colour = "32";
+    this->colour = "35";
     if (this->type == "directory") {
-      this->colour = "38";
+      this->colour = "31";
     }
   }
 }
 
-void Output::print() {
-  std::cout  << this->icon << " \033[1;" << this->colour << "m" << this->name << "\033[0m";
+std::unordered_map<char, bool> process_flags(std::vector<std::string> flags) {
+  std::unordered_map<char, bool> valid_flags {
+    {'a', false},
+    {'i', false},
+    {'l', false}
+  };
+  
+  for (auto f : flags) {
+    for (char a : f) {
+      if (valid_flags.find(a) != valid_flags.end()) {
+	valid_flags[a] = true;
+      }
+    }
+  }
+
+  return valid_flags;
+}
+
+void Output::print(std::unordered_map<char, bool> options) {
+  std::string separator = "     ";
+  if (options['l']) {
+    separator = "\n";
+  }
+  if (not options['i']) {
+    this->icon = "";
+  }
+  if (not options['a']) {
+    if (this->is_hidden)
+      return;
+  }
+  std::cout << this->icon << " \033[1;" << this->colour << "m" << this->name << "\033[0m";
+  std::cout << separator;
 }
 
 std::vector<Output> output(std::string path, std::vector<std::string> flags) {
+
+  std::unordered_map<char, bool> options = process_flags(flags);
 
   // fix for paths including the / character after the last directory name
   int path_buffer = 1;
