@@ -1,5 +1,7 @@
-#include "Output.h"
-#include "Parcer.h"
+#include <iostream>
+
+#include "Output.hpp"
+#include "Parcer.hpp"
 
 int main(int argc, char *argv[]) {
   std::vector<std::string> args;
@@ -9,15 +11,14 @@ int main(int argc, char *argv[]) {
 
   std::string path;
   std::vector<std::string> flags;
-
-  auto pf = parser(args);
-  if (!pf.has_value()) {
-    std::cout << "Error"
-              << "\n";
-  } else {
-    path = pf.value().path;
-    flags = pf.value().flags;
+  
+  Path_Flags pf = parser(args);
+  if (pf.path == "") {
+    std::cout << "Error: ambiguous path.\n";
+    return 1;
   }
+  path = pf.path;
+  flags = pf.flags;
   std::vector<Output> output_list = output(path, flags);
 
   std::unordered_map<char, bool> options = process_flags(flags);
@@ -25,4 +26,5 @@ int main(int argc, char *argv[]) {
   for (auto o : output_list) {
     o.print(options);
   }
+  std::cout << std::endl;
 }

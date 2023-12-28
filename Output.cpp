@@ -1,11 +1,8 @@
 #include <filesystem>
-#include <vector>
-#include <algorithm>
 #include <iostream>
-#include <unordered_map>
-#include <algorithm>
+#include <functional>
 
-#include "Output.h"
+#include "Output.hpp"
 
 namespace fs = std::filesystem;
 
@@ -68,17 +65,12 @@ std::vector<Output> output(std::string path, std::vector<std::string> flags) {
 
   std::unordered_map<char, bool> options = process_flags(flags);
 
-  // fix for paths including the / character after the last directory name
-  int path_buffer = 1;
-  if (path[path.size() - 1] == '/') {
-    path_buffer = 0;
-  }
-  fs::path p = path;
+fs::path p = path;
 
   std::vector<Output> output_list;
   for (const auto &entry : fs::directory_iterator(p)) {
     std::string file_or_directory = entry.path();
-    file_or_directory = file_or_directory.substr(path.size() + path_buffer); // removing the path from the beginning
+    file_or_directory = file_or_directory.substr(path.size()); // removing the path from the beginning
     Output o(file_or_directory, entry.is_directory());
     output_list.push_back(o);
   }
