@@ -1,4 +1,4 @@
-#include "Parcer.hpp"
+#include "Parser.hpp"
 #include <iostream>
 
 
@@ -23,6 +23,8 @@ Path_Flags parser(std::vector<std::string> args) {
     }
   }
   
+
+
   // adding the '/' character in the path if missing
   if (path.back() != '/') {
     path.push_back('/');

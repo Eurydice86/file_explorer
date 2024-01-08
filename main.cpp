@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "Output.hpp"
-#include "Parcer.hpp"
+#include "Parser.hpp"
 
 int main(int argc, char *argv[]) {
   std::vector<std::string> args;

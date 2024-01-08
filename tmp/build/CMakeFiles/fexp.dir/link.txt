@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/fexp.dir/main.cpp.o CMakeFiles/fexp.dir/Output.cpp.o CMakeFiles/fexp.dir/Parser.cpp.o -o fexp 
